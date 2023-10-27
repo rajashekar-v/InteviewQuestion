@@ -1,0 +1,52 @@
+
+//Sort by Biggest and smallest numbers recursively Asked by UWORLD Company
+<?php
+// Online PHP compiler to run PHP program online
+// Print "Hello World!" message
+$input_array = [-8,2,-7,15,9,25,-25,88,30,-50];
+$sorted_array = array();
+function sortArray($input_array,&$sorted_array)
+{
+    if(count($input_array) > 0)
+    {
+        if(count($sorted_array)%2 == 0)
+        {
+            arsort($input_array);
+            $descending_array = array_values($input_array);
+            array_push($sorted_array,$descending_array[0]);
+            $key = array_search($descending_array[0],$input_array);
+            unset($input_array[$key]);
+            sortArray($input_array,$sorted_array);
+        }
+        else
+        {
+            asort($input_array);
+            $ascending_array = array_values($input_array);
+            array_push($sorted_array,$ascending_array[0]);
+            $key = array_search($ascending_array[0],$input_array);
+            unset($input_array[$key]);
+            sortArray($input_array,$sorted_array);
+        }    
+    }
+    
+    
+    return $sorted_array;
+}
+print_r(sortArray($input_array,$sorted_array));
+?>
+
+OUTPUT
+**********************
+Array
+(
+    [0] => 88
+    [1] => -50
+    [2] => 30
+    [3] => -25
+    [4] => 25
+    [5] => -8
+    [6] => 15
+    [7] => -7
+    [8] => 9
+    [9] => 2
+)
